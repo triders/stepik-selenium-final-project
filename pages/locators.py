@@ -21,6 +21,6 @@ class ProductPageLocators():
     PRODUCT_PRICE = (By.CSS_SELECTOR, "div.product_main > p.price_color")
 
     ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, "button.btn-add-to-basket")
-    ALERT_SUCCESS_MESSAGE_PRODUCT_ADDED_TO_CART = (By.CSS_SELECTOR, "#messages > .alert-success")  # and hope that
-    # "added to cart" will be the first by this selector
+    ALERT_SUCCESS_MESSAGE_PRODUCT_ADDED_TO_CART = (By.CSS_SELECTOR, "#messages > .alert-success strong")  # and hope
+    # that "added to cart" will be the first by this selector
     ALERT_INFO_MESSAGE_CART_VALUE_AMOUNT = (By.CSS_SELECTOR, "#messages > .alert-info p strong")

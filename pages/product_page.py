@@ -39,4 +39,4 @@ class ProductPage(BasePage):
         # check that this exact product has been added to cart (check info message)
         product_name = self.get_product_name()
         success_message = self.get_added_to_cart_success_message()
-        assert product_name in success_message, f"Expected {product_name} to be part of {success_message}"
+        assert product_name == success_message, f"Expected {product_name} to be part of {success_message}"
