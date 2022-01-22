@@ -15,12 +15,24 @@ class BasePage():
         self.url = url
         # self.browser.implicitly_wait(timeout)
 
+    def go_to_basket(self):
+        basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
+        basket_link.click()
+
     def go_to_login_page(self):
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         login_link.click()
 
     def open(self):
         self.browser.get(self.url)
+
+    def is_element_disappeared(self, element_locating_method, locator, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(
+                EC.presence_of_element_located((element_locating_method, locator)))
+        except TimeoutException:
+            return False
+        return True
 
     def is_element_present_on_page(self, element_locating_method, locator):
         try:
@@ -37,14 +49,6 @@ class BasePage():
         except TimeoutException:
             return True
         return False
-
-    def is_element_disappeared(self, element_locating_method, locator, timeout=4):
-        try:
-            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(
-                EC.presence_of_element_located((element_locating_method, locator)))
-        except TimeoutException:
-            return False
-        return True
 
     def should_be_login_link(self):
         assert self.is_element_present_on_page(*BasePageLocators.LOGIN_LINK), \
@@ -63,6 +67,3 @@ class BasePage():
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
-
-
-
