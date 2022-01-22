@@ -19,7 +19,8 @@ class ProductPage(BasePage):
         return product_price_element_text
 
     def get_added_to_cart_success_message(self):
-        added_to_cart_message = self.browser.find_element(*ProductPageLocators.ALERT_SUCCESS_MESSAGE_PRODUCT_ADDED_TO_CART)
+        added_to_cart_message = self.browser.find_element(
+            *ProductPageLocators.ALERT_SUCCESS_MESSAGE_PRODUCT_ADDED_TO_CART)
         added_to_cart_message_text = added_to_cart_message.text
         return added_to_cart_message_text
 
@@ -40,3 +41,11 @@ class ProductPage(BasePage):
         product_name = self.get_product_name()
         success_message = self.get_added_to_cart_success_message()
         assert product_name == success_message, f"Expected {product_name} to be part of {success_message}"
+
+    def should_not_be_success_message_before_product_added_to_cart(self):
+        assert self.is_not_element_present_on_page(*ProductPageLocators.ALERT_SUCCESS_MESSAGE_PRODUCT_ADDED_TO_CART), \
+            "A success message is present on page, but it shouldn't (because product hasn't been added to cart yet)"
+
+    def should_success_message_disappear_after_a_while(self):
+        assert self.is_element_disappeared(*ProductPageLocators.ALERT_SUCCESS_MESSAGE_PRODUCT_ADDED_TO_CART), \
+            "A success message didn't disappear after some time, but it should had to"
