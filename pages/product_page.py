@@ -34,7 +34,7 @@ class ProductPage(BasePage):
         product_price = self.get_product_price()
         basket_value_amount = self.get_basket_value_amount_from_info_message()
         assert product_price == basket_value_amount, f"Expected basket value amount ({basket_value_amount}) " \
-                                                   f"to be equal to product price ({product_price})"
+                                                     f"to be equal to product price ({product_price})"
 
     def should_be_product_name_in_added_to_basket_success_message(self):
         # check that this exact product has been added to basket (check info message)
